@@ -12,6 +12,7 @@ $(function () {
   })
   // 从 layui 中获取 form 对象
   var form = layui.form
+  var layer = layui.layer
   //通过 form.verify() 函数自定义效验规则
   form.verify({
     //自定义了一个叫做 pwd 效验规则
@@ -45,9 +46,12 @@ $(function () {
     };
     $.post('/api/reguser', data, function (res) {
       if (res.status !== 0) {
-        return console.log(res.message);
+        // return console.log(res.message);
+        return layer.msg(res.message);
       }
-      console.log('注册成功！');
+      layer.msg('注册成功,请登录！');
+      //模拟人的点击行为
+      $('#link_login').click()
     })
 
   })
